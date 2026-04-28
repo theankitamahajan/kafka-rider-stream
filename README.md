@@ -28,10 +28,8 @@ Perfect for beginners and intermediate developers who want to get comfortable wi
 ---
 
 ## 🏗️ Architecture Diagram
-<img width="486" height="739" alt="Screenshot 2026-04-27 at 9 33 26 PM" src="https://github.com/user-attachments/assets/5e6fb77f-0d05-47a1-8f2b-9769bdd50a5f" />
 
-
-## 📁 Project Structure
+<img width="1108" height="745" alt="Screenshot 2026-04-27 at 9 51 44 PM" src="https://github.com/user-attachments/assets/1a6ba1e9-71fc-47cc-a0ab-8f18c05b628a" />## 📁 Project Structure
 
 ```bash
 kafka-crash-course/
