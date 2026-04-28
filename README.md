@@ -28,55 +28,59 @@ Perfect for beginners and intermediate developers who want to get comfortable wi
 ---
 
 ## 🏗️ Architecture Diagram
+## 🏗️ Architecture Diagram
 
 ```mermaid
 flowchart TD
-    subgraph "Producer"
-        P[producer.js] 
+    %% Producer
+    subgraph "Producer Application"
+        Producer[producer.js<br/>Interactive Producer]
     end
 
-    subgraph "Apache Kafka Cluster"
+    %% Kafka Cluster
+    subgraph "Apache Kafka Cluster [Docker]"
         direction TB
-        Z[Zookeeper] 
-        B[Kafka Broker\n(port 9092)]
-        
+        Z[Zookeeper<br/>Port: 2181]
+        Broker[Kafka Broker<br/>Port: 9092]
+
         subgraph "Topic: rider-updates"
             direction LR
-            P0[Partition 0\n(North Riders)] 
-            P1[Partition 1\n(South Riders)]
+            P0[Partition 0<br/>North Riders<br/>Offset: ...]
+            P1[Partition 1<br/>South Riders<br/>Offset: ...]
         end
-        
-        B --- Z
-        B --- P0
-        B --- P1
+
+        Broker --- Z
+        Broker --> P0
+        Broker --> P1
     end
 
-    subgraph "Consumers"
+    %% Consumers
+    subgraph "Consumer Applications"
         direction TB
-        C1[consumer.js\nGroup: group1]
-        C2[consumer.js\nGroup: group2]
-        C3[consumer.js\nGroup: group3]
+        CG1[Consumer<br/>Group: group1<br/>consumer.js]
+        CG2[Consumer<br/>Group: group2<br/>consumer.js]
+        CG3[Consumer<br/>Group: group3<br/>consumer.js]
     end
 
     %% Data Flow
-    P -->|"Sends messages\n(key: location-update)"| B
-    P -.->|"north → Partition 0"| P0
-    P -.->|"south → Partition 1"| P1
+    Producer -->|"1. Produces messages<br/>(JSON payload + key)"| Broker
+    Producer -.->|"north → Partition 0"| P0
+    Producer -.->|"south → Partition 1"| P1
 
-    P0 --> C1
-    P0 --> C2
-    P1 --> C1
-    P1 --> C2
-    P0 --> C3
-    P1 --> C3
+    P0 & P1 -->|"2. Messages delivered to<br/>all consumer groups"| CG1
+    P0 & P1 -->|"2. Messages delivered to<br/>all consumer groups"| CG2
+    P0 & P1 -->|"2. Messages delivered to<br/>all consumer groups"| CG3
 
-    style P fill:#4ade80,stroke:#166534
-    style B fill:#60a5fa,stroke:#1e40af
-    style P0 fill:#f472b6,stroke:#831843
-    style P1 fill:#f472b6,stroke:#831843
-    style C1 fill:#a5b4fc,stroke:#4338ca
-    style C2 fill:#a5b4fc,stroke:#4338ca
-    style C3 fill:#a5b4fc,stroke:#4338ca
+    %% Styling
+    classDef producer fill:#4ade80,stroke:#166534,stroke-width:2px,color:#111
+    classDef broker fill:#60a5fa,stroke:#1e40af,stroke-width:2px,color:#111
+    classDef topic fill:#f472b6,stroke:#831843,stroke-width:2px,color:#111
+    classDef consumer fill:#a5b4fc,stroke:#4338ca,stroke-width:2px,color:#111
+
+    class Producer producer
+    class Broker,Z broker
+    class P0,P1 topic
+    class CG1,CG2,CG3 consumer
 
 ## 📁 Project Structure
 
