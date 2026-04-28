@@ -1,26 +1,38 @@
-# kafka-app
-I have structured it to highlight the **System Architecture**, the **Tech Stack**, and clear **Setup Instructions**.
+# Kafka Crash Course 🚀
 
-I have also included a section specifically for **draw.io** that explains how to translate the logic into a professional diagram for your LinkedIn post or portfolio.
+A hands-on, practical guide to learning **Apache Kafka** using **Node.js**, **Docker**, and the **kafkajs** library.
 
-[file-tag: code-generated-file-0-1777339085577901166]
+This project demonstrates core Kafka concepts like topics, partitions, producers, consumers, and consumer groups through a simple real-world example: **real-time rider location tracking**.
 
-### How to use this for your GitHub & LinkedIn:
-1.  **On GitHub:** Rename this file to `README.md` and push it to the root of your `kafka-rider-stream` repository.
-2.  **For the Diagram:**
-    * Go to **draw.io**.
-    * Place a **Node.js icon** (Producer) on the left, a **Kafka icon** (Broker) in the middle, and another **Node.js icon** (Consumer) on the right.
-    * Add a **Docker icon** behind the Kafka/Zookeeper section to show you are running a containerized infrastructure.
-    * Export it as a PNG and include it in your GitHub README and your LinkedIn post.
+---
 
-### Final Step for your Code:
-Remember to update your `client.js` one last time to use `localhost:9092` before you push these changes:
+## 📌 Overview
 
-```javascript
-// client.js
-const { Kafka } = require("kafkajs");
+This crash course helps you understand how Kafka works by building a small system where:
+- A **producer** sends rider location updates ("north" or "south").
+- Messages are partitioned based on location.
+- Multiple **consumers** (in different groups) can consume these updates in real-time.
 
-exports.kafka = new Kafka({
-  clientId: "my-app",
-  brokers: ["localhost:9092"], // Final fix for local Docker Desktop connection
-});
+Perfect for beginners and intermediate developers who want to get comfortable with Kafka quickly.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Node.js** (Intermediate level recommended)
+- **Apache Kafka** + **Zookeeper**
+- **kafkajs** (Official Kafka client for Node.js)
+- **Docker** (for running Kafka locally)
+- **VS Code** (recommended)
+
+---
+
+## 📁 Project Structure
+
+```bash
+kafka-crash-course/
+├── client.js          # Kafka client configuration
+├── admin.js           # Creates the Kafka topic
+├── producer.js        # Interactive producer for location updates
+├── consumer.js        # Consumer with group support
+└── README.md
