@@ -1,4 +1,4 @@
-# Kafka Crash Course 🚀
+# Kafka  Rider Stream 🚀
 
 A hands-on, practical guide to learning **Apache Kafka** using **Node.js**, **Docker**, and the **kafkajs** library.
 
