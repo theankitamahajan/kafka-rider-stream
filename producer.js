@@ -10,7 +10,7 @@ async function init() {
   const producer = kafka.producer();
 
   console.log("Connecting Producer");
-  await producer.connect();
+  await producer.connect();    
   console.log("Producer Connected Successfully");
 
   rl.setPrompt("> ");
