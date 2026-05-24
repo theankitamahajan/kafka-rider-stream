@@ -3,7 +3,7 @@ const { kafka } = require("./client");
 async function init() {
   const admin = kafka.admin();//creatingadmin
   console.log("Admin connecting...");
-  admin.connect();
+  admin.connect();   
   console.log("Adming Connection Success...");
  //topic is an array
   console.log("Creating Topic [rider-updates]");
